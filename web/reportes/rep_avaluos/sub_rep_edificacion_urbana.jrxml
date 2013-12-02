@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="800" pageHeight="842" columnWidth="760" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ide_predio" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     sigc_estructura."ide_estructura" AS sigc_estructura_ide_estructura,
+     sigt_construccion."edad" AS sigt_construccion_edad,
+     sigc_factor_estado."ide_estado_conservacion" AS sigc_factor_estado_ide_estado_conservacion,
+     sigc_pared."ide_estructura" AS sigc_pared_ide_estructura
+FROM
+     "public"."sigc_estructura" sigc_estructura INNER JOIN "public"."sigt_construccion" sigt_construccion ON sigc_estructura."ide_estruc_construc" = sigt_construccion."ide_estructura"
+     INNER JOIN "public"."sigc_factor_estado" sigc_factor_estado ON sigt_construccion."ide_estado_conservacion" = sigc_factor_estado."ide_estado_conservacion"
+     INNER JOIN "public"."sigc_pared" sigc_pared ON sigt_construccion."ide_pared" = sigc_pared."ide_pared"]]>
+	</queryString>
+	<field name="sigc_estructura_ide_estructura" class="java.lang.Integer"/>
+	<field name="sigt_construccion_edad" class="java.math.BigDecimal"/>
+	<field name="sigc_factor_estado_ide_estado_conservacion" class="java.lang.Integer"/>
+	<field name="sigc_pared_ide_estructura" class="java.lang.Integer"/>
+	<columnHeader>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="389" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CARACTERISTICAS DE LA EDIFICACION]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch"/>
+	</detail>
+</jasperReport>

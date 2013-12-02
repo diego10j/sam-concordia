@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resultados" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b17a6cc2-2151-475f-a924-db7f89632301">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Desarrollosw\\Desktop\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     *,
+     resultados."count" AS resultados_count,
+     resultados."totalofrecido" AS resultados_totalofrecido,
+     resultados."totalrecibido" AS resultados_totalrecibido
+FROM
+     "public"."resultados" resultados]]>
+	</queryString>
+	<field name="count" class="java.lang.Long"/>
+	<field name="totalofrecido" class="java.math.BigDecimal"/>
+	<field name="totalrecibido" class="java.math.BigDecimal"/>
+	<field name="resultados_count" class="java.lang.Long"/>
+	<field name="resultados_totalofrecido" class="java.math.BigDecimal"/>
+	<field name="resultados_totalrecibido" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="179" splitType="Stretch">
+			<image>
+				<reportElement uuid="2d163828-3aec-4dbb-b7e0-c836640107cb" x="192" y="0" width="308" height="173"/>
+				<imageExpression><![CDATA["C:\\Users\\Desarrollosw\\Desktop\\reportes\\teleton_2.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="16" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="120" splitType="Stretch">
+			<textField>
+				<reportElement uuid="ee188cbc-7b91-470b-9f8f-8f6320ff780a" x="377" y="79" width="134" height="36"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalrecibido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b87b2e8c-d0b7-4b34-9f1f-ee07bab39335" x="377" y="41" width="167" height="30"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalofrecido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1ccc1ae3-06aa-4b55-9a19-5568bcf7e48c" x="377" y="4" width="167" height="32"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{count}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="2f3a808b-61c8-42ac-abb1-793f3ecfeb51" x="8" y="0" width="272" height="36"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Total de LLamadas Registradas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2f3a808b-61c8-42ac-abb1-793f3ecfeb51" x="8" y="41" width="297" height="30"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Total Monto Ofrecido en Llamadas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2f3a808b-61c8-42ac-abb1-793f3ecfeb51" x="8" y="80" width="332" height="35"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Total Dinero Recaudado en En Llamadas]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="32" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="teleton" language="groovy" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c03f8a1f-0998-4252-a463-e0e91d92aafe">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="numero" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     teleton."codigo" AS teleton_codigo,
+     teleton."cedula" AS teleton_cedula,
+     teleton."nombre" AS teleton_nombre,
+     teleton."direccion" AS teleton_direccion,
+     teleton."referencia" AS teleton_referencia,
+     teleton."celular" AS teleton_celular,
+     teleton."telefono" AS teleton_telefono,
+     teleton."valor ofrecido" AS teleton_valor_ofrecido,
+     teleton."fecha llamada" AS teleton_fecha_llamada,
+     teleton."valor recibido" AS teleton_valor_recibido,
+     teleton."fecha de recibido" AS teleton_fecha_de_recibido,
+     teleton."estado" AS teleton_estado,
+     teleton."usuario" AS teleton_usuario
+FROM
+     "public"."teleton" teleton
+WHERE
+     teleton."codigo" = $P{numero}]]>
+	</queryString>
+	<field name="teleton_codigo" class="java.lang.Integer"/>
+	<field name="teleton_cedula" class="java.lang.String"/>
+	<field name="teleton_nombre" class="java.lang.String"/>
+	<field name="teleton_direccion" class="java.lang.String"/>
+	<field name="teleton_referencia" class="java.lang.String"/>
+	<field name="teleton_celular" class="java.lang.String"/>
+	<field name="teleton_telefono" class="java.lang.String"/>
+	<field name="teleton_valor_ofrecido" class="java.math.BigDecimal"/>
+	<field name="teleton_fecha_llamada" class="java.sql.Date"/>
+	<field name="teleton_valor_recibido" class="java.math.BigDecimal"/>
+	<field name="teleton_fecha_de_recibido" class="java.sql.Date"/>
+	<field name="teleton_estado" class="java.lang.Boolean"/>
+	<field name="teleton_usuario" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="135" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="7d5c14e5-6710-4e9c-bbc6-7dfb41d3d5c0" x="143" y="84" width="322" height="44"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Comprobante Operador]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="9dca91f8-10c7-42d2-b004-646fe0dd83a8" x="-1" y="1" width="572" height="61" backcolor="#33CCFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="b42f382b-fd15-4559-a0ca-5daf71ee79cc" x="1" y="3" width="572" height="61" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
+					<font fontName="Goudy Old Style" size="32" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Teletón La Concordia]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="253" splitType="Stretch">
+			<textField>
+				<reportElement uuid="f16fbe02-d03e-4f59-a891-8de8cf7acfa1" x="107" y="0" width="44" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{teleton_codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a32d5932-cb8a-4118-967a-8b42c451a0ab" x="107" y="33" width="74" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{teleton_cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="de78b726-2330-4949-b1a9-1c4376419b7a" x="333" y="34" width="227" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{teleton_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7b436ec1-e767-47b2-9f2e-7b1b5c050c5f" x="106" y="89" width="434" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{teleton_direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4110c578-1bc7-42a4-a7de-772dbaafd35f" x="106" y="115" width="434" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{teleton_referencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4aa2613b-9cc7-47f2-8c1b-76eb5552ce42" x="107" y="59" width="74" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{teleton_celular}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="191a6e2d-cade-4e2d-85e7-d1e1380a2dce" x="334" y="57" width="150" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{teleton_telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bf311336-6c5a-43e5-a9c0-c495eef47e73" x="137" y="154" width="44" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{teleton_valor_ofrecido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6e34ad0c-85ea-4a5b-806d-1c47edc43d4e" x="366" y="155" width="150" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{teleton_fecha_llamada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d898a043-7d04-4d15-8019-61369b8f9153" x="136" y="189" width="150" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{teleton_usuario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="97f25ca5-ca38-497c-bae4-2b0d6ec4be4d" x="0" y="0" width="88" height="20"/>
+				<textElement/>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0851d38a-cdf4-4b00-a811-f6a8a27a97ca" x="0" y="33" width="88" height="20"/>
+				<textElement/>
+				<text><![CDATA[CEDULA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ec1e0552-adc3-4a09-8e16-d9f46033f8a8" x="228" y="34" width="88" height="20"/>
+				<textElement/>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5c51bd8d-e78f-4963-95c9-b745301e29c7" x="0" y="89" width="88" height="20"/>
+				<textElement/>
+				<text><![CDATA[DIRECCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="41c5cf77-eca2-470e-8878-6ecb5a7cf25b" x="0" y="116" width="88" height="20"/>
+				<textElement/>
+				<text><![CDATA[REFERENCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3db37403-4fdc-4501-9cd8-547b79096cad" x="0" y="61" width="88" height="20"/>
+				<textElement/>
+				<text><![CDATA[CELULAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="70896373-b126-4edf-87f9-48c0b01bdd3e" x="228" y="59" width="88" height="20"/>
+				<textElement/>
+				<text><![CDATA[TELEFONO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="631e49a4-4ed3-4c08-aa1c-97ec3109fd37" x="0" y="154" width="114" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[OFERTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="55c6ea2a-1f1e-4c1a-a75d-03cb151f2d58" x="234" y="155" width="114" height="20"/>
+				<textElement/>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18b558ee-bf7c-462c-afa6-b920b8130aed" x="0" y="190" width="114" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[OPERADOR]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="0997d3fa-883f-4648-baf3-2a786f51e043" x="0" y="143" width="572" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="0997d3fa-883f-4648-baf3-2a786f51e043" x="0" y="22" width="572" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="ab2d26a1-0108-42d4-9bff-f46df6d34c7e" x="460" y="15" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="20" splitType="Stretch"/>
+	</summary>
+</jasperReport>

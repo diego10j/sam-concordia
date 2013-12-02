@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report3" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="68ccb1be-ee84-42cc-9f86-5eb46a4868f7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="154"/>
+	<parameter name="ide" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select a.fec_dcto as fecha,b.nombre,g.des_estado_civil as estado,c.nombre as vendedor,h.des_estado_civil,a.ubicacion,a.manzana,a.lote,a.area,a.porcentaje,a.ejecutor,d.des_reg_document
+,a.nro_documento,e.des_reg_adqu,f.des_reg_entid,a.repertorio,a.folio,a.fojas,a.observacion from reg_ficha a,rec_clientes_reg b,rec_clientes_reg c,reg_documento d,
+reg_adquision e,reg_entid_leg f,sigc_estado_civil g,sigc_estado_civil h
+where a.pos_actual=b.ide_cliente
+and a.pos_anterior=c.ide_cliente
+and d.ide_reg_document=a.documento
+and e.ide_reg_adqu=a.adquisicion
+and f.ide_reg_entid=a.entidad
+and g.ide_estado_civil=b.ide_estado_civil
+and h.ide_estado_civil=c.ide_estado_civil
+and a.ide_rp_ficha=$P{ide}]]>
+	</queryString>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="estado" class="java.lang.String"/>
+	<field name="vendedor" class="java.lang.String"/>
+	<field name="des_estado_civil" class="java.lang.String">
+		<fieldDescription><![CDATA[Almacena la descripción del estado civil]]></fieldDescription>
+	</field>
+	<field name="ubicacion" class="java.lang.String"/>
+	<field name="manzana" class="java.lang.String"/>
+	<field name="lote" class="java.lang.String"/>
+	<field name="area" class="java.lang.String"/>
+	<field name="porcentaje" class="java.lang.Integer"/>
+	<field name="ejecutor" class="java.lang.String"/>
+	<field name="des_reg_document" class="java.lang.String"/>
+	<field name="nro_documento" class="java.lang.Integer"/>
+	<field name="des_reg_adqu" class="java.lang.String"/>
+	<field name="des_reg_entid" class="java.lang.String"/>
+	<field name="repertorio" class="java.lang.Integer"/>
+	<field name="folio" class="java.lang.Integer"/>
+	<field name="fojas" class="java.lang.String"/>
+	<field name="observacion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="6e7aeaa0-226d-48b9-88b3-1eda2af2187f" x="47" y="16" width="480" height="63"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REGISTRO DE LA PROPIEDAD Y MERCANTIL DEL CANTON LA CONCORDIA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="21f204d1-01f5-4d5b-8282-2653e1a3b36d" x="170" y="8" width="208" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAZON DE INSCRIPCION]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="371" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="7788b24e-2a90-47ab-8f26-56c9a4ed4c6f" x="26" y="0" width="501" height="161"/>
+				<textElement textAlignment="Justified">
+					<font size="10" isUnderline="false"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" Con esta fecha queda inscrita la presente " + $F{des_reg_document}.toString() +" de " + $F{des_reg_adqu}.toString() + " de los bienes dejados por el señor:" + $F{vendedor}.toString() + ", a favor de los menores "
++ $F{nombre}.toString() +  "," + $F{observacion}.toString() + ",concedida el " + $F{fecha}.toString() + ","
++ " ante el " + $F{ejecutor}.toString() + " de la " + $F{des_reg_entid}.toString() + " en el repertorio " + $F{repertorio}.toString() + " del libro de propiedades folio " + $F{folio}.toString() + "." +
+"" + $F{fecha}.getMonth() + ""]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="165d78dc-c198-47dd-808e-f2d08eac8fce" x="26" y="192" width="144" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement uuid="55f73644-1caa-447d-a0e9-e060e1e5102f" x="139" y="192" width="156" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7e454122-d6c8-4f42-b661-6bb2662f9236" x="219" y="334" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[REGISTRADOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="48699127-f745-4b6c-a67b-2de6669e8daf" x="163" y="303" width="203" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[DR. PATRICIO ORTEGA OCAMPO]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

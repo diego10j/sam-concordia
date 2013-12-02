@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ncredito_rep" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f207a5e7-e6a1-477d-860f-9f48462d2c27">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="80"/>
+	<parameter name="ide" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost:8080/sam/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT a.nd_fecres,a.ide_ncredito,a.nro_ncredito,a.ide_cliente,a.nc_vlrletras,a.nc_vlrnros,a.nc_resol,a.nc_nrojuici,a.nc_titul,a.nc_fecemi,a.nc_fecsol,
+b.nombre,
+c.des_ubicacion
+from rec_ncredito as a,rec_clientes as b,munc_ubicacion as c
+WHERE
+a.ide_cliente = b.ide_cliente AND
+a.nc_expedi = c.ide_ubicacion AND
+a.ide_ncredito =$P{ide}]]>
+	</queryString>
+	<field name="nd_fecres" class="java.sql.Date"/>
+	<field name="ide_ncredito" class="java.lang.Integer"/>
+	<field name="nro_ncredito" class="java.lang.String"/>
+	<field name="ide_cliente" class="java.lang.Integer"/>
+	<field name="nc_vlrletras" class="java.lang.String"/>
+	<field name="nc_vlrnros" class="java.lang.Integer"/>
+	<field name="nc_resol" class="java.lang.String"/>
+	<field name="nc_nrojuici" class="java.lang.String"/>
+	<field name="nc_titul" class="java.lang.Integer"/>
+	<field name="nc_fecemi" class="java.sql.Date"/>
+	<field name="nc_fecsol" class="java.sql.Date"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="des_ubicacion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="b2189dee-8df0-44c8-a0c5-76525241bca5" x="2" y="0" width="553" height="23"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "/reportes/rep_sam/rep_cabecera.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="400" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="a438bc2f-9682-418c-a0c6-596110e9af89" x="14" y="60" width="527" height="42"/>
+				<textElement>
+					<font size="10" isUnderline="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DE CONFORMIDAD CON LO QUE DISPONE EL ART. 308 DEL CODIGO TRIBUTARIO, EL SUSCRITO DIRECTOR FINANCIERO OTORGA LA PRESENTE NOTA DE CREDITO A FAVOR DE " + $F{nombre}.toString() + " POR LA CANTIDAD DE " + $F{nc_vlrletras}.toString() + "."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="2bc048e3-89a3-467a-ac5f-bb5f06eda06e" x="14" y="204" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fecha de Solicitud]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="7c9ac3df-c47e-40ac-9a54-e1c149e264f3" x="114" y="204" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nc_fecsol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3387a66e-ae1f-40c4-89bc-d06f49a2034d" x="14" y="188" width="527" height="16"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["LA CONCORDIA A " + new SimpleDateFormat("dd' de 'MMMMM' de 'yyyy").format($F{nc_fecemi}) + " "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5809f4f1-5253-4959-b152-5283c0beb040" x="150" y="40" width="164" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOTA  DE CRÉDITO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0e3bb5fa-4679-4e9f-91e6-ee2400a67261" x="112" y="0" width="323" height="23"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECCION FINANCIERA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d6399a5f-4d32-4701-b20b-8af3d5d9bcb4" x="112" y="20" width="323" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ORIGINAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2b00d774-6e58-4aa0-ba35-5c29b4a7711c" x="14" y="267" width="136" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESPONSABLE DE RENTAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="971627c5-d3a4-4f24-8cdb-49506d98440c" x="201" y="267" width="136" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECTOR FINANCIERO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3294b7fb-6d36-4800-bfbb-a011885c46d6" x="365" y="267" width="176" height="24"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ TESORERIA GENERAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c8dae4fd-d182-4b95-8fc2-668e58b713e0" x="314" y="40" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nro_ncredito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="40b80834-47ad-4276-80db-1639a2db67e0" x="14" y="102" width="527" height="86"/>
+				<textElement>
+					<font size="10" isUnderline="false" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" SEGUN RESOLUCION Nro " + $F{nc_resol}.toString() + " POR CONCEPTO " + $F{nc_nrojuici}.toString() + " EXPEDIDA POR LA " + $F{des_ubicacion}.toString() + " EL " + new SimpleDateFormat("dd' de 'MMMMM' de 'yyyy").format($F{nd_fecres}) + " UNA VEZ COMPROBADOS LOS FUNDAMENTOS DE DERECHO CONTENIDOS EN EL RECLAMO ADMINISTRATIVO y/o  JURISDICCIONAL ANTES CITADO TODA VEZ QUE SE HAN RECIBIDO LOS ORIGINALES  DE LOS TITULOS DE CREDITO " + $F{nc_titul}.toString() + " QUE CONSTITUYEN EL RESPALDO PARA LA PRESENTE EMISION. "]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="5" splitType="Stretch"/>
+	</summary>
+</jasperReport>
