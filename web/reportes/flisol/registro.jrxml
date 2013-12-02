@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="registro" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a0759d21-a34f-4a65-bfb1-78b143b13a61">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ide" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     registro."nombre" AS registro_nombre,
+     registro."certificar" AS registro_certificar
+FROM
+     "public"."registro" registro
+where
+ registro."ide"=$P{ide}]]>
+	</queryString>
+	<field name="registro_nombre" class="java.lang.String"/>
+	<field name="registro_certificar" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="524">
+			<textField>
+				<reportElement uuid="328f7de3-ccc3-4104-9c07-9c2544b08a25" x="183" y="249" width="381" height="38"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{registro_nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b5798437-d12a-42c4-b9ab-ff845e0bf435" positionType="FixRelativeToBottom" x="303" y="362" width="274" height="39"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{registro_certificar}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="800" pageHeight="842" columnWidth="760" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="28"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ide_predio" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     sigt_caracteristicas_suelo."detalle" AS sigt_caracteristicas_suelo_detalle,
+     sigt_localizacion."detalle" AS sigt_localizacion_detalle,
+     sigt_forma."detalle" AS sigt_forma_detalle,
+     sigt_topografia."detalle" AS sigt_topografia_detalle,
+     sigt_caracteristicas_suelo."codigo" AS sigt_caracteristicas_suelo_codigo,
+     sigt_localizacion."codigo" AS sigt_localizacion_codigo,
+     sigt_topografia."codigo" AS sigt_topografia_codigo,
+     sigt_forma."codigo" AS sigt_forma_codigo
+FROM
+     "public"."sigt_caracteristicas_suelo" sigt_caracteristicas_suelo INNER JOIN "public"."sigt_area_terreno" sigt_area_terreno ON sigt_caracteristicas_suelo."ide_caracteristica_suelo" = sigt_area_terreno."ide_caracteristica_suelo"
+     INNER JOIN "public"."sigt_localizacion" sigt_localizacion ON sigt_area_terreno."ide_localizacion" = sigt_localizacion."ide_localizacion"
+     INNER JOIN "public"."sigt_topografia" sigt_topografia ON sigt_area_terreno."ide_topografia" = sigt_topografia."ide_topografia"
+     INNER JOIN "public"."sigt_forma" sigt_forma ON sigt_area_terreno."ide_forma" = sigt_forma."ide_forma"
+WHERE
+     sigt_area_terreno.ide_predio = $P{ide_predio}]]>
+	</queryString>
+	<field name="sigt_caracteristicas_suelo_detalle" class="java.lang.String"/>
+	<field name="sigt_localizacion_detalle" class="java.lang.String"/>
+	<field name="sigt_forma_detalle" class="java.lang.String"/>
+	<field name="sigt_topografia_detalle" class="java.lang.String"/>
+	<field name="sigt_caracteristicas_suelo_codigo" class="java.lang.String"/>
+	<field name="sigt_localizacion_codigo" class="java.lang.String"/>
+	<field name="sigt_topografia_codigo" class="java.lang.String"/>
+	<field name="sigt_forma_codigo" class="java.lang.String"/>
+	<columnHeader>
+		<band height="78" splitType="Stretch">
+			<staticText>
+				<reportElement x="52" y="2" width="216" height="76"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[   CARACT. SUELO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="62" y="37" width="201" height="29"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{sigt_caracteristicas_suelo_detalle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="213" y="3" width="25" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{sigt_localizacion_codigo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="268" y="2" width="216" height="76"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[   TOPOGRAFIA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="279" y="37" width="201" height="29"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{sigt_topografia_detalle}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="484" y="2" width="216" height="76"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  LOCALIZACION]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="498" y="37" width="187" height="29"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{sigt_localizacion_detalle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="654" y="3" width="25" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{sigt_localizacion_codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="409" y="3" width="25" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{sigt_topografia_codigo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+</jasperReport>

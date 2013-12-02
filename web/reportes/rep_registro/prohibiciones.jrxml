@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="prohibiciones" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31fcdd7f-1fb4-4b69-89e0-34903d25390a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="ide" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select b.cedula,b.nombre,c.detalle,c.entidad,c.medio,c.registrado,c.repertorio,c.folio
+from reg_ficha a,rec_clientes_reg b,reg_prohibicion c
+where a.pos_actual=b.ide_cliente
+and c.ide_rp_ficha=a.ide_rp_ficha
+and c.cod_rp_prohibicion=$P{ide}]]>
+	</queryString>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="detalle" class="java.lang.String"/>
+	<field name="entidad" class="java.lang.String"/>
+	<field name="medio" class="java.lang.String"/>
+	<field name="registrado" class="java.lang.String"/>
+	<field name="repertorio" class="java.lang.String"/>
+	<field name="folio" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="128" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="2d7a185a-00f2-4287-ac15-6820c007639e" x="89" y="19" width="403" height="51"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REGISTRO DE LA PROPIEDAD Y MERCANTIL DEL CANTON LA CONCORDIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="df4ece6d-44a3-4ecd-a541-f4937059ad43" x="201" y="95" width="191" height="33"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAZON DE INSCRIPCION]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="380" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d96f7897-3c8a-41b0-b4df-4b643a72371e" x="38" y="5" width="490" height="153"/>
+				<textElement textAlignment="Justified">
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Con esta fecha queda incrita la presente " + $F{detalle}.toString() +
+" seguido por el(a) " + $F{entidad}.toString() + " dentro del " + $F{medio}.toString() +
+" en contra  del señor(a) " + $F{nombre}.toString() + ", con cedula de"
++ " ciudadania nro " + $F{cedula}.toString() + ", en el " +
+$F{registrado}.toString() + ",Rep Nro " + $F{repertorio}.toString() +
+",Folio Nro " + $F{folio}.toString() + ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="41bb8286-8e23-4ef9-97a2-8ca819c169c0" x="53" y="178" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["La Concordia, "]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="0055c7b3-8607-429a-a752-d37f0140c7ad" x="127" y="178" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement uuid="d095a05a-4169-4abb-96ed-40bc5d8d002f" x="229" y="178" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1685494f-8234-42ca-86fd-4cd58fbec04d" x="188" y="322" width="203" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[DR. PATRICIO ORTEGA OCAMPO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2dc41fa8-1bf6-4cfd-bb2f-7ccbdec8602c" x="241" y="342" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[REGISTRADOR]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

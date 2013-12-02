@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5f212825-37f7-4333-8886-38573071e8bd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ide_cliente" class="java.lang.Integer"/>
+	<parameter name="rango" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost:8080/sam/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="valor_esp" class="java.lang.Float"/>
+	<parameter name="valor_tas_adm" class="java.lang.Float"/>
+	<queryString>
+		<![CDATA[select nombre,cedula,genero from rec_clientes where ide_cliente=$P{ide_cliente}]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="genero" class="java.lang.String"/>
+	<variable name="variable1" class="java.lang.String">
+		<variableExpression><![CDATA[new String ($F{genero}==null?("El Señor (a),"):$F{genero}.equals("M")?("El Señor,"):("La Señora,"))]]></variableExpression>
+	</variable>
+	<variable name="total" class="java.lang.Float"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="55e476a7-ca05-48a6-a70b-5b88c32dde9e" x="1" y="17" width="553" height="23"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "/reportes/rep_sam/rep_cabecera.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement uuid="5e009faa-87f5-4fc9-8880-5086b6643b3e" x="402" y="0" width="105" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<text><![CDATA[Numero de Especie:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="f26bd126-d70e-42d0-bafd-0d3e85d153a4" x="471" y="0" width="52" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{rango}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="103" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="3aabaebf-9518-4a57-af3e-a54189da92ef" x="209" y="77" width="143" height="24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CERTIFICACION]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="286f3792-5d16-40a5-be67-9b32162dafb0" x="47" y="18" width="157" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="200" splitType="Stretch">
+			<textField>
+				<reportElement uuid="857a5b32-ce7f-4860-8afe-bf55dcd96ddc" x="47" y="9" width="488" height="47"/>
+				<textElement verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["El(a) señor(a) "+$F{nombre}+", portador(a) de la cédula de identidad o RUC N "+$F{cedula}+", revisado el sistema."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7affef86-e952-4418-a8bd-52ae897473e3" x="49" y="74" width="476" height="24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO ADEUDA VALORES AL MUNICIPIO DE LA CONCORDIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="25191a79-b0a8-4bfa-9a02-e2f55faf31c4" x="53" y="113" width="387" height="20"/>
+				<textElement/>
+				<text><![CDATA[VALIDO POR 30 (treinta dias) desde la fecha de su entrega]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="247" splitType="Stretch">
+			<line>
+				<reportElement uuid="43450e81-eb71-4ff4-b5fa-183dcb721cc7" x="203" y="216" width="127" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="6d89db5a-b395-4a0f-a7cf-c150a335c14b" x="176" y="218" width="181" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tesorero Municipal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a9aee72c-c13a-4c7b-9246-eeac43c05925" positionType="Float" x="53" y="14" width="125" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DETALLE DE VENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7deeebdd-291f-482f-87fa-fbde3822b604" positionType="Float" x="53" y="52" width="146" height="20"/>
+				<textElement/>
+				<text><![CDATA[Esp. No Adueda al Municipio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d0ea7fa0-1d00-44c2-aba3-0213387867d9" positionType="Float" x="53" y="72" width="146" height="20"/>
+				<textElement/>
+				<text><![CDATA[Valor Tasa Administrativa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="12063c5a-d6e6-49b2-85ef-daa6d655a4dc" positionType="Float" x="139" y="107" width="47" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="ec2d97fc-83dc-47e5-b591-0dfdce9647a1" positionType="Float" x="201" y="52" width="30" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{valor_esp}-$P{valor_tas_adm}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="bf37afd7-e240-40bd-a1d5-720c9195fd50" positionType="Float" x="201" y="72" width="30" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{valor_tas_adm}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="ddc6432e-45ba-4c91-95bd-012a8e7c374e" positionType="Float" x="204" y="107" width="26" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{valor_esp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="21f89a9b-a018-4e89-8b27-5a78f6b0b384" x="196" y="107" width="10" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

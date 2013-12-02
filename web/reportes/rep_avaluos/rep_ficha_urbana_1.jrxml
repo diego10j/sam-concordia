@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="800" pageHeight="842" columnWidth="760" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\sistema\\sistema\\web\\reportes\\rep_sam\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ide_predio" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select * from sigt_predio where ide_predio=$P{ide_predio}]]>
+	</queryString>
+	<field name="ide_predio" class="java.lang.Long"/>
+	<field name="fecha_digitacion" class="java.sql.Timestamp"/>
+	<field name="fecha_ficha" class="java.sql.Date"/>
+	<field name="ide_tipo_propiedad" class="java.lang.Integer"/>
+	<field name="cod_provincia" class="java.lang.String"/>
+	<field name="cod_canton" class="java.lang.String"/>
+	<field name="cod_parroquia" class="java.lang.String"/>
+	<field name="zona" class="java.lang.String"/>
+	<field name="sector" class="java.lang.String"/>
+	<field name="manzana" class="java.lang.String"/>
+	<field name="lote" class="java.lang.String"/>
+	<field name="bloque" class="java.lang.String"/>
+	<field name="nivel" class="java.lang.String"/>
+	<field name="unidad" class="java.lang.String"/>
+	<field name="placa" class="java.lang.String"/>
+	<field name="ide_propiedad" class="java.lang.Integer"/>
+	<field name="ide_uso" class="java.lang.Long"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="numero" class="java.lang.String"/>
+	<field name="telefono_referencia" class="java.lang.String"/>
+	<field name="calle1" class="java.lang.String"/>
+	<field name="calle2" class="java.lang.String"/>
+	<field name="clave" class="java.lang.String"/>
+	<field name="ide_distribucion" class="java.lang.Long"/>
+	<field name="clave_anterior" class="java.lang.String"/>
+	<field name="representante_legal" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="direccion_representante" class="java.lang.String"/>
+	<field name="observaciones" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="114" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="46" width="760" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CATASTRO PREDIAL URBANO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="68" width="760" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[FICHA DE RELEVAMIENTO PREDIAL URBANO]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="550" y="93" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="155" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="6" width="135" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLAVE CATASTRAL: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="150" y="6" width="268" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clave}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="26" width="121" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CODIGO NACIONAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="15" y="46" width="35" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cod_provincia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="46" width="35" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cod_canton}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="46" width="35" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cod_parroquia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="159" y="26" width="135" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CODIGO LOCAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="159" y="46" width="35" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{zona}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="46" width="35" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sector}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="245" y="46" width="35" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{manzana}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="289" y="46" width="35" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lote}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="46" width="35" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bloque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="378" y="46" width="35" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nivel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="423" y="46" width="35" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{unidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="499" y="6" width="242" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO ANTERIOR]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="499" y="27" width="242" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{clave_anterior}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="86" width="135" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ UBICACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="106" width="39" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CALLE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="57" y="106" width="703" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{calle1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="126" width="60" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NUMERO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="126" width="165" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="245" y="126" width="79" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BARRIO/SITIO:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<summary>
+		<band height="81">
+			<subreport>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="-20" y="15" width="800" height="5" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true"/>
+				<subreportParameter name="ide_predio">
+					<subreportParameterExpression><![CDATA[$P{ide_predio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:\\sistema\\sistema\\web\\reportes\\rep_avaluos\\sub_rep_construccion_urbana.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="-20" y="0" width="800" height="5" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true"/>
+				<subreportParameter name="ide_predio">
+					<subreportParameterExpression><![CDATA[$P{ide_predio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:\\sistema\\sistema\\web\\reportes\\rep_avaluos\\sub_rep_propietario_urbana.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="-19" y="7" width="800" height="5" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true"/>
+				<subreportParameter name="ide_predio">
+					<subreportParameterExpression><![CDATA[$P{ide_predio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:\\sistema\\sistema\\web\\reportes\\rep_avaluos\\sub_rep_propie_anterior_urbana.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

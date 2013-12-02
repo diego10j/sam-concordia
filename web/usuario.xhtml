@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"      
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Consulta de Usuarios</title>
+    </h:head>
+    <h:body>
+        <h:form prependId="false" id="formulario">
+            <p:layout fullPage="true">
+                <p:layoutUnit position="west" size="400" resizable="false">
+                    <h:graphicImage value="upload/logos/logo_.png"/>
+                    <br/>
+                    <br/>
+                    <h:panelGrid columns="1" style="width:100%;text-align: center;">
+                        <h:outputText value="Consulte sus valores a pagar en el municipio" style="font-size: 22px"/>
+                        <h:graphicImage value="imagenes/user_info.png"/>
+                        <p:commandButton value="Inicio" style=" font-size: 35px;"  update="cuerpo" action="#{bean_consulta.limpiar}"/>    
+                    </h:panelGrid>
+                </p:layoutUnit>
+                <p:layoutUnit  position="center">
+                    <h:panelGroup id="cuerpo">
+
+                        <div align="center">  
+                            <br/>
+                            <br/> 
+                            <h:panelGroup  rendered="#{bean_consulta.consulto == 1}">
+                                <p:inputText id="txtcedula" style="font-size: 50px;" size="20" value="#{bean_consulta.cedula}" onkeypress="return false;"/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <p:panelGrid columns="3">
+                                    <p:commandButton value="1"  style=" font-size: 35px;" update="txtcedula" action="#{bean_consulta.metodo1}"/>
+                                    <p:commandButton value="2"  style=" font-size: 35px;" update="txtcedula" action="#{bean_consulta.metodo2}"/>
+                                    <p:commandButton value="3"  style=" font-size: 35px;" update="txtcedula" action="#{bean_consulta.metodo3}"/>
+                                    <p:commandButton value="4"  style=" font-size: 35px;" update="txtcedula" action="#{bean_consulta.metodo4}"/>
+                                    <p:commandButton value="5"  style=" font-size: 35px;" update="txtcedula" action="#{bean_consulta.metodo5}"/>
+                                    <p:commandButton value="6"  style=" font-size: 35px;" update="txtcedula" action="#{bean_consulta.metodo6}"/>
+                                    <p:commandButton value="7"  style=" font-size: 35px;" update="txtcedula" action="#{bean_consulta.metodo7}"/>
+                                    <p:commandButton value="8"  style=" font-size: 35px;" update="txtcedula" action="#{bean_consulta.metodo8}"/>
+                                    <p:commandButton value="9"  style=" font-size: 35px;" update="txtcedula" action="#{bean_consulta.metodo9}"/>
+                                    <p:commandButton icon="ui-icon-cancel"  style=" font-size: 35px;" update="txtcedula" action="#{bean_consulta.limpiar}"/>
+                                    <p:commandButton value="0"  style=" font-size: 35px;" update="txtcedula" action="#{bean_consulta.metodo0}"/>
+                                    <p:commandButton icon="ui-icon-arrowthick-1-w"  style=" font-size: 35px;" update="txtcedula" action="#{bean_consulta.atras}"/>                           
+                                </p:panelGrid>
+                                <p:panelGrid columns="1">
+                                    <p:commandButton value="Consultar" style=" font-size: 35px;" update="cuerpo" action="#{bean_consulta.consultar}"/>    
+                                </p:panelGrid>
+                            </h:panelGroup>
+
+                            <h:panelGroup rendered="#{bean_consulta.consulto == 2}">
+                                <h:panelGrid columns="2" style="text-align: center">
+                                    <h:graphicImage value="imagenes/im_info.png"/>                                    
+                                    <h:outputText style="font-size: 35px;" value="#{bean_consulta.mensaje}"/>                                    
+                                    <br/>
+                                    <p:commandButton value="Inicio" style=" font-size: 35px;"  update="cuerpo" action="#{bean_consulta.limpiar}"/>    
+                                </h:panelGrid>
+                            </h:panelGroup>
+
+                            <h:panelGroup rendered="#{bean_consulta.consulto == 3}">
+
+                                <p:panelGrid  columns="2"  style="width: 100%">
+
+                                    <p:commandButton value="Imprimir" style=" font-size: 35px;" type="button" >
+                                        <p:printer target="impre" />  
+                                    </p:commandButton>    
+
+                                    <p:commandButton value="Inicio" style=" font-size: 35px;"  update="cuerpo" action="#{bean_consulta.limpiar}"/>    
+                                </p:panelGrid>
+                                <br/>
+                                <br/>                               
+
+                                <h:panelGroup id="impre">
+                                    <p:panelGrid columns="2"  style="width: 100%">
+                                        <h:outputText style="font-size: 16px;font-weight: bold" value="CONTRIBUYENTE :"/>
+                                        <h:outputText style="font-size: 16px;" value="#{bean_consulta.nombre}"/>
+                                        <h:outputText style="font-size: 16px;font-weight: bold" value="DOCUMENTO IDENTIFICACIÓN :"/>
+                                        <h:outputText style="font-size: 16px;" value="#{bean_consulta.cedula}"/>
+                                    </p:panelGrid>
+                                    <br/>
+                                    <p:panelGrid columns="2"  style="text-align:right;width: 100%">
+                                        <h:outputText style="font-size: 18px;font-weight: bold" value="Total :"/>
+                                        <h:outputText style="font-size: 18px;font-weight: bold" value="#{bean_consulta.total} $"/>
+                                    </p:panelGrid>
+                                    <br/>
+                                    <p:dataTable value="#{bean_consulta.lis_consulta}" paginator="true" rows="10" var="fila" paginatorAlwaysVisible="false">
+
+                                        <p:column headerText="DETALLE">
+                                            <h:outputText value="#{fila[0]}"/>
+                                        </p:column>
+                                        <p:column headerText="VALOR" style="width: 30px;">
+                                            <h:outputText value="#{fila[1]}"/>
+                                        </p:column>
+                                        <p:column headerText="OBSERVACIÓN">
+                                            <h:outputText value="#{fila[2]}"/>
+                                        </p:column>
+
+                                    </p:dataTable>
+
+                                </h:panelGroup>
+                            </h:panelGroup>
+
+
+                        </div>
+                    </h:panelGroup>
+                </p:layoutUnit>
+            </p:layout>
+        </h:form>
+
+    </h:body>
+</html>
+

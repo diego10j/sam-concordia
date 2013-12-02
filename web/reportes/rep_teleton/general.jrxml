@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="general" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2af557bf-66b5-4468-90a5-e6379819b4e2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="101"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="PieChartDataset" uuid="ecda8c0c-97e9-43e1-98d1-85fa12ce7abb"/>
+	<queryString>
+		<![CDATA[SELECT
+     teleton."codigo" AS teleton_codigo,
+     teleton."cedula" AS teleton_cedula,
+     teleton."nombre" AS teleton_nombre,
+     teleton."direccion" AS teleton_direccion,
+     teleton."referencia" AS teleton_referencia,
+     teleton."celular" AS teleton_celular,
+     teleton."telefono" AS teleton_telefono,
+     teleton."valor ofrecido" AS teleton_valor_ofrecido,
+     teleton."fecha llamada" AS teleton_fecha_llamada,
+     teleton."valor recibido" AS teleton_valor_recibido,
+     teleton."fecha de recibido" AS teleton_fecha_de_recibido,
+     teleton."estado" AS teleton_estado,
+     teleton."usuario" AS teleton_usuario
+FROM
+     "public"."teleton" teleton]]>
+	</queryString>
+	<field name="teleton_codigo" class="java.lang.Integer"/>
+	<field name="teleton_cedula" class="java.lang.String"/>
+	<field name="teleton_nombre" class="java.lang.String"/>
+	<field name="teleton_direccion" class="java.lang.String"/>
+	<field name="teleton_referencia" class="java.lang.String"/>
+	<field name="teleton_celular" class="java.lang.String"/>
+	<field name="teleton_telefono" class="java.lang.String"/>
+	<field name="teleton_valor_ofrecido" class="java.math.BigDecimal"/>
+	<field name="teleton_fecha_llamada" class="java.sql.Date"/>
+	<field name="teleton_valor_recibido" class="java.math.BigDecimal"/>
+	<field name="teleton_fecha_de_recibido" class="java.sql.Date"/>
+	<field name="teleton_estado" class="java.lang.Boolean"/>
+	<field name="teleton_usuario" class="java.lang.String"/>
+	<group name="teleton_usuario">
+		<groupExpression><![CDATA[$F{teleton_usuario}]]></groupExpression>
+		<groupHeader>
+			<band height="31">
+				<frame>
+					<reportElement uuid="1fa892b2-81c0-4118-b629-c899ee10e1a6" mode="Opaque" x="0" y="0" width="802" height="31" forecolor="#B89F7D" backcolor="#70A9C6"/>
+				</frame>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="48511da5-7459-45bf-91fe-8590cc0fb3be" style="SubTitle" isPrintRepeatedValues="false" x="6" y="3" width="518" height="23" forecolor="#FFFFFF"/>
+					<textElement>
+						<font fontName="Arial" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{teleton_usuario}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band height="555" splitType="Stretch">
+			<image>
+				<reportElement uuid="0f96b6c6-e261-4266-a246-a2c9d3677e45" x="2" y="0" width="799" height="555"/>
+				<imageExpression><![CDATA["C:\\Users\\Desarrollosw\\Desktop\\reportes\\teleton_1.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="22fc2c8b-0bd5-4974-81be-843c113df1f0" style="SubTitle" x="336" y="65" width="449" height="29"/>
+				<textElement textAlignment="Right">
+					<font size="22" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Gobierno Municipal La Concordia]]></text>
+			</staticText>
+			<frame>
+				<reportElement uuid="6f549070-3501-49f3-8d17-c800a9099222" mode="Opaque" x="-20" y="0" width="822" height="65" forecolor="#006699" backcolor="#006699"/>
+				<staticText>
+					<reportElement uuid="fa729c02-3f97-4698-ad47-03e3d4001fb2" style="Title" x="231" y="0" width="578" height="65"/>
+					<textElement textAlignment="Right">
+						<font size="54" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Teletón 2012]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<frame>
+				<reportElement uuid="c5ac5766-66b5-49f7-8ab9-4c35fa01e46c" x="4" y="0" width="798" height="25"/>
+				<staticText>
+					<reportElement uuid="bb00fc44-7297-421c-b6e8-eee35bbdefec" style="Column header" positionType="Float" x="346" y="6" width="47" height="14" forecolor="#000000"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Celular]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="bd1c1631-1f33-4e87-8acd-7ef5a5673f60" style="Column header" positionType="Float" x="403" y="7" width="57" height="14" forecolor="#000000"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Telefono]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="510a8647-280c-44f1-a684-be743bf37a51" style="Column header" positionType="Float" x="473" y="7" width="34" height="14" forecolor="#000000"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Valor]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="a3838408-ab7d-497f-bff1-90021f8be61d" style="Column header" positionType="Float" x="534" y="6" width="40" height="14" forecolor="#000000"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="89ca80ba-4237-4784-8591-88ed9eb6032d" style="Column header" positionType="Float" x="600" y="6" width="61" height="14" forecolor="#000000"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Valor Rec]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="6ab7869c-2d98-4627-99ea-8db70c08c84a" style="Column header" positionType="Float" x="670" y="6" width="71" height="14" forecolor="#000000"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Fecha Rec]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="41b42287-3bb4-4e24-aca4-b81d335d3e69" style="Column header" positionType="Float" x="747" y="6" width="50" height="14" forecolor="#000000"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Estado]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="98ba32f0-62c8-4a58-885e-eb11208e5b67" style="Column header" positionType="Float" x="75" y="5" width="47" height="14" forecolor="#000000"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Nombre]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="73e7929b-7c07-42a1-97d1-b49b25d3e346" x="197" y="2" width="62" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Direccion]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement uuid="ffc64897-7927-47e6-b4ca-de36f0f9b360" style="Column header" positionType="Float" x="4" y="4" width="47" height="14" forecolor="#000000"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Cedula]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="49" splitType="Stretch">
+			<line>
+				<reportElement uuid="f06961c0-58fa-4aa3-a03a-bb3061a47896" positionType="FixRelativeToBottom" x="6" y="31" width="786" height="1"/>
+			</line>
+			<frame>
+				<reportElement uuid="54f9c7ae-64d4-44d9-a696-14130ea55938" x="2" y="0" width="798" height="44"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="1c52a672-adc1-4e1c-a876-486a5b508adf" style="Detail" positionType="Float" x="0" y="3" width="61" height="20"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{teleton_cedula}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="b0641f7e-0b95-47f5-9313-5a0f5f55eb65" style="Detail" positionType="Float" x="72" y="4" width="115" height="25"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{teleton_nombre}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="d22e8b19-8ec6-4705-8edf-a150865cd997" style="Detail" positionType="Float" x="349" y="0" width="47" height="14"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{teleton_celular}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="1ff449b6-c754-49f0-8dca-08db9f54dda8" style="Detail" positionType="Float" x="410" y="0" width="47" height="14"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{teleton_telefono}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="e6d12da7-69b3-47f4-a27f-b275f8ce0464" style="Detail" positionType="Float" x="475" y="0" width="47" height="14"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{teleton_valor_ofrecido}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="477336ae-6d4d-4f2b-847a-49001809c23c" style="Detail" positionType="Float" x="538" y="0" width="62" height="14"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{teleton_fecha_llamada}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="f39bd37c-33e1-4636-aa3e-5c8470a85069" style="Detail" positionType="Float" x="607" y="2" width="47" height="14"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{teleton_valor_recibido}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="eb470704-d5b1-4c24-a4bd-4aa8dc94a0f3" style="Detail" positionType="Float" x="749" y="3" width="47" height="14"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{teleton_estado}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="dffb0fc0-b0cc-4f76-a227-4e2ce6c2258e" style="Detail" positionType="Float" x="677" y="3" width="47" height="14"/>
+					<textElement>
+						<font fontName="Arial" size="10" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{teleton_fecha_de_recibido}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="c0ee83e7-8295-4634-936b-9a4fce55f932" x="196" y="3" width="144" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{teleton_direccion}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement uuid="a892c915-1499-4232-83a6-5a485a6808e6" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="39" splitType="Stretch">
+			<frame>
+				<reportElement uuid="4de762c0-91bd-428c-bdef-8e8a74504a6a" mode="Opaque" x="2" y="0" width="798" height="39" forecolor="#D0B48E" backcolor="#006699"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="53dcbd16-14e3-4bed-a2c8-78e196459699" style="Column header" x="753" y="0" width="40" height="16" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="b6100692-6034-4c25-84c1-f56c5493161c" style="Column header" x="673" y="0" width="80" height="16" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="c6bfbda9-972b-4554-ad34-2418158cd7d6" style="Column header" x="2" y="0" width="197" height="16" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

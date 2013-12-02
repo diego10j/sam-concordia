@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="car_ven_general" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b3b42e57-2717-436e-9d0e-34f45815519d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     rec_valores."ide_titulo",
+     rec_clientes."nombre",
+     rec_valores."fecha_emision",
+     rec_valores."fecha_vence",
+     rec_valores."fecha_titulo",
+     rec_valores."valor_imponible",
+     rec_valores."clave_catastral",
+     rec_valores."num_titulo",
+     rec_valores."detalle",
+     rec_valores."fecha_control" AS rec_valores_fecha_control
+FROM
+     "rec_clientes" rec_clientes INNER JOIN "rec_valores" rec_valores ON rec_clientes."ide_cliente" = rec_valores."ide_cliente"
+     INNER JOIN "rec_coactivas" rec_coactivas ON rec_valores."ide_cliente" = rec_coactivas."ide_cliente"
+WHERE
+     rec_valores.ide_estado = 1
+     and fecha_vence < CURRENT_DATE]]>
+	</queryString>
+	<field name="ide_titulo" class="java.lang.Long"/>
+	<field name="fecha_emision" class="java.sql.Date"/>
+	<field name="fecha_vence" class="java.sql.Date"/>
+	<field name="fecha_titulo" class="java.sql.Date"/>
+	<field name="valor_imponible" class="java.math.BigDecimal"/>
+	<field name="clave_catastral" class="java.lang.String"/>
+	<field name="num_titulo" class="java.lang.String"/>
+	<field name="detalle" class="java.lang.String"/>
+	<field name="rec_valores_fecha_control" class="java.sql.Date"/>
+	<group name="fecha_vence">
+		<groupExpression><![CDATA[$F{fecha_vence}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="ae094321-662a-444e-9d94-92f765e704f4" x="28" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[ide_titulo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="021385a7-ee90-4f08-8847-6c412dfb7b77" x="122" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[fecha_emision]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5bc13517-932d-40ac-bde5-7309cfe63243" x="231" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[fecha_vence]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="904aa800-8999-497a-93ae-ac7cb70eeaa0" x="340" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[fecha_titulo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1d9adc72-5968-48b0-9e59-995f99a39907" x="460" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[valor_imponible]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b7096cd-a112-4733-aa9e-ec618bb38b19" x="600" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[clave_catastral]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2e090528-f963-400a-b511-35cda6fb6342" x="725" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[num_titulo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement uuid="d0b4516f-6fd8-4f5f-a35b-8d1308d9b451" x="12" y="26" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ide_titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d38823a7-ba3e-4f30-ad61-6a5815d317ec" x="122" y="38" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fecha_emision}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="10b02332-726a-44c4-a0ec-b02ae6707192" x="231" y="40" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fecha_vence}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d3773ada-9ce3-42c3-89d2-35fa16faac73" x="340" y="51" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fecha_titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d1b2ea68-4b49-49a9-8a8c-9314c81d37e0" x="460" y="60" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{valor_imponible}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7eec0237-7bdd-422b-82ef-6cc95031cd9b" x="600" y="66" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{clave_catastral}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="439a01bd-cbbc-4358-977e-f28d62657840" x="725" y="74" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{num_titulo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

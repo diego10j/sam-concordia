@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="800" pageHeight="842" columnWidth="760" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="64"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ide_predio" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select  area_construida,medida,frente,nro_bloque,area_construida,cod_uso,des_uso
+from sigt_construccion,sigt_area_terreno,sigc_uso
+where sigt_construccion.ide_predio=$P{ide_predio}
+and sigt_area_terreno.ide_predio=$P{ide_predio}
+and sigt_construccion.ide_uso=sigc_uso.ide_uso]]>
+	</queryString>
+	<field name="area_construida" class="java.math.BigDecimal"/>
+	<field name="medida" class="java.math.BigDecimal"/>
+	<field name="frente" class="java.math.BigDecimal"/>
+	<field name="nro_bloque" class="java.lang.Integer"/>
+	<field name="cod_uso" class="java.lang.String"/>
+	<field name="des_uso" class="java.lang.String"/>
+	<variable name="frente_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{frente}]]></variableExpression>
+	</variable>
+	<variable name="medida_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{medida}]]></variableExpression>
+	</variable>
+	<variable name="area_construida_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{area_construida}]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="48" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="176" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUPERFICIE DEL PREDIO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="112" y="28" width="118" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[# BLOQUE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="28" width="109" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AREA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="339" y="28" width="378" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[USO DEL SUELO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="112" y="0" width="118" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nro_bloque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="0" width="109" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{area_construida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="346" y="0" width="40" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{cod_uso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="339" y="0" width="378" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="398" y="0" width="308" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{des_uso}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="73">
+			<staticText>
+				<reportElement x="37" y="11" width="139" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AREA TOTAL TERRENO :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="31" width="139" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FRENTE PRINCIPAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="51" width="139" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AREA CONSTRUCCIÓN:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="176" y="31" width="160" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{frente_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="176" y="11" width="160" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{medida_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="176" y="51" width="160" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{area_construida_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1c1f5bf6-9975-4ade-86c4-7379f65c79f8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="num_notificacion" class="java.lang.String"/>
+	<parameter name="ide_cliente" class="java.lang.Integer"/>
+	<parameter name="fecha" class="java.util.Date"/>
+	<parameter name="fecha_coactiva" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select ide_titulo,des_ingreso,valor,nombres,
+cast (extract (year from  cast ($P{fecha_coactiva} as DATE)) as integer) as anio,
+cast (extract (MONTH from  cast ($P{fecha_coactiva} as DATE))as integer) as mes,
+cast (extract (DAY from  cast ($P{fecha_coactiva} as DATE)) as integer) as dia
+from tes_ingreso
+where ide_titulo in (
+select ide_titulo from rec_valores where
+ide_estado=1
+and ide_cliente=$P{ide_cliente}
+and fecha_vence<$P{fecha})
+GROUP BY ide_titulo,des_ingreso,valor,nombres
+order by ide_titulo DESC]]>
+	</queryString>
+	<field name="ide_titulo" class="java.lang.Long"/>
+	<field name="des_ingreso" class="java.lang.String"/>
+	<field name="valor" class="java.math.BigDecimal"/>
+	<field name="nombres" class="java.lang.String"/>
+	<field name="anio" class="java.lang.Integer"/>
+	<field name="mes" class="java.lang.Integer"/>
+	<field name="dia" class="java.lang.Integer"/>
+	<variable name="valor_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+	</variable>
+	<variable name="valor_2" class="java.math.BigDecimal" resetType="Group" resetGroup="descripcion" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+	</variable>
+	<group name="descripcion">
+		<groupExpression><![CDATA[$F{des_ingreso}]]></groupExpression>
+		<groupHeader>
+			<band height="14">
+				<textField>
+					<reportElement uuid="98e0e0c2-c119-47f7-b488-8122cab50199" x="55" y="0" width="338" height="14"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{des_ingreso}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="descripcion">
+					<reportElement uuid="0c9dc9a1-0171-4b79-886c-6eeb8009a52f" x="440" y="0" width="46" height="14"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{valor_2}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="efafd6a8-3805-4046-afbc-85c5b1d138ee" key="staticText-35" x="421" y="0" width="18" height="14"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[$.]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="425" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="a0c966b8-b15e-41af-82b9-6120ca96036d" key="staticText-11" x="29" y="367" width="240" height="17"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Sigue lo proveído]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b7a3e55e-85c8-42d9-a984-21b79b21bc84" key="staticText-12" x="28" y="384" width="511" height="30"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Justified">
+					<font size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Hago saber a Ud(s), que se ha emitido en su contra el título de crédito susceptible de accíon coactiva, mismo que ha continuación se detalla]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ae990906-d65b-43ff-b3d1-9d3c0fd4abf7" key="staticText-23" x="209" y="57" width="103" height="25"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[NOTIFICACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="519be383-ea11-4552-807e-5178c460f875" key="staticText-24" x="26" y="322" width="240" height="30"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="11" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Sr. Fernando del Pozo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="08a2b2bb-e09a-432c-b6e4-b623a0403949" key="staticText-25" x="288" y="322" width="240" height="30"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="11" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[AB. RENE GUANOLUISA]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="70413ca5-a410-4052-933e-180d582f9683" key="line-5" x="27" y="319" width="204" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="fca7356c-a7cc-4cfd-b35c-8c281dae3f3d" key="line-6" x="288" y="319" width="220" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="c572664d-f98d-45d9-9c5f-3000581f3087" key="staticText-26" x="26" y="337" width="240" height="30"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="11" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[TESORERO MUNICIPAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="49940387-342a-4698-a774-1f9412323077" key="staticText-27" x="21" y="82" width="352" height="70"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[NOTIFICACION:                                                                                   JUZGADO DE COACTIVAS                                                            JOSE MEJIA 710 Y BOLIVAR                                                              2315050 - 2314664 ext. 145   www.laconcordia.gob.ec]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c87d67f8-0b19-42cb-b747-25af6b6c2466" key="staticText-28" x="288" y="80" width="94" height="30"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[La Concordia, a]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ba989360-c16d-4963-a637-12a59b77d721" key="staticText-29" x="395" y="80" width="16" height="30"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a4bb3534-6e6a-4ad4-8d06-86ef939852cc" key="staticText-30" x="22" y="152" width="511" height="44"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[  De acuerdo con la aprobacion del Sr. Alcalde del I. Municipio de La CONCORDIA, se nombra a la Dra. Fernanda Molina de la C. para que de ser el caso,dirija el procedimiento coactivo.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5f52beb6-a760-423a-bbec-ca19f987958b" key="staticText-31" x="21" y="181" width="511" height="99"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Por lo expuesto y amparados en lo dispuesto en el Art. 151 del Código Tributario, comunico a Ud(s) que tienen la obligación de cancelar en el plazo de OCHO DIAS contados a partir de esta fecha, el valor que corresponde a la liquidación que se practicará al momento en que el contribuyente se acerque a la ventanilla de Recaudación, o dentro del mismo plazo presente las observaciones de las que se crea asistido; caso contrario se iniciará en su contra el proceso coactivo para que cancele el capital más los intereses, multas y costas procesales que determina la Ordenanza. Notifíquese.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b58ced03-e022-4150-960b-9479edaa224f" key="staticText-33" mode="Transparent" x="23" y="10" width="502" height="23" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None">
+					<font fontName="Serif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Bold" pdfEncoding="CP1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[GOBIERNO A. D. MUNICIPAL DEL CANTON LA CONCORDIA]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="9d05b9ca-3320-4ae0-9019-8a5827203abe" key="line-8" x="10" y="11" width="534" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="41e0630f-760a-4383-80f2-869969682657" key="line-9" x="10" y="11" width="1" height="43"/>
+			</line>
+			<line>
+				<reportElement uuid="c725c3aa-6029-40cc-9012-09bade443694" key="line-10" x="10" y="54" width="534" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="982358c8-2150-4035-90aa-13746ddc2098" key="staticText-34" mode="Transparent" x="21" y="31" width="502" height="23" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None">
+					<font fontName="Serif" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Bold" pdfEncoding="CP1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[JUZGADO DE COACTIVAS]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="f57b0b98-b4a2-48be-aa51-483b00008e98" key="line-11" x="544" y="11" width="1" height="43"/>
+			</line>
+			<textField>
+				<reportElement uuid="29f82b71-e683-4695-a544-e715e57ac97e" x="316" y="57" width="24" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{num_notificacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cb1c7d27-045e-47bd-b979-6ea254f8d7aa" x="113" y="82" width="100" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ide_cliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="fe038429-e734-4021-baac-64d51b2d848a" key="staticText-29" x="485" y="80" width="20" height="30"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[del]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="ea3ae1ae-740d-4cb2-a435-4d0024ad3f86" x="379" y="82" width="18" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6f998979-1a78-4942-a1a3-47cab55b972b" x="415" y="80" width="73" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mes}==1? "Enero":$F{mes}==2? "Febrero":$F{mes}==3? "Marzo":
+$F{mes}==4? "Marzo":$F{mes}==5? "Marzo":$F{mes}==6? "Marzo":$F{mes}==7? "Marzo":
+$F{mes}==8? "Marzo":$F{mes}==9? "Septiembre":$F{mes}==10? "Octubre":$F{mes}==11? "Noviembre":$F{mes}==12? "Diciembre":""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f46920e6-a35b-4611-880c-e411ef9204dd" x="506" y="82" width="32" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{anio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c541a73f-2c48-4cab-917c-8ad4198b8ede" key="staticText-13" x="15" y="2" width="49" height="16"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Señor(a):]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="e2284408-c14c-40dc-91c6-46c294855b8f" x="64" y="2" width="360" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="161">
+			<staticText>
+				<reportElement uuid="d02c1788-c31c-4d5c-92f2-db24b4b56de1" key="staticText-23" x="211" y="9" width="103" height="25"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[NOTIFICACION]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="ec529cf9-acfc-46bc-a008-7a3f66c4125e" x="0" y="3" width="549" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="bdeaed40-8d2b-455c-869b-3a8b637a5a17" x="155" y="55" width="24" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{num_notificacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a1c3ce7d-e7e0-4516-aef7-45f5cdf907b0" x="27" y="35" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fecha Notificacion:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0670b5d2-455c-419e-828d-fcf81b305f49" x="26" y="56" width="129" height="20"/>
+				<textElement/>
+				<text><![CDATA[Numero de Notificacion:]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yy">
+				<reportElement uuid="4f5f1ca3-d639-4ae4-9700-a1063339283c" x="127" y="35" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c7461cb2-0c12-4d41-82b8-58aeeb971232" x="26" y="78" width="52" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nombre: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="79b35642-7be7-4fd2-ad4c-966ba90d313a" x="78" y="78" width="238" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="afe8d644-ef86-4e13-babb-37cfb3948664" key="staticText-19" x="352" y="128" width="174" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[NOTIFICADOR]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="cf4f9acc-a23f-42b8-ac0a-897267a54f0e" key="line-4" x="293" y="123" width="220" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="650eeaae-ce8f-4cc3-bbab-e1cafba39036" key="line-3" x="31" y="123" width="204" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="9645931e-a97a-4d4c-bd9c-79374ed09447" key="staticText-16" x="29" y="125" width="240" height="30"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[RECIBIDO]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="29f82b71-e683-4695-a544-e715e57ac97e" x="320" y="12" width="24" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{num_notificacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c0c5b010-8a19-4b78-b055-f608ce31c7b5" key="staticText-16" x="19" y="62" width="240" height="30"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[RECIBIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4fe82b77-36f5-456e-90d6-e0c88745db97" key="staticText-17" x="281" y="62" width="240" height="14"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Sr. HERNÁN YÁNEZ GALLO]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="400b993d-14b8-48df-a20b-f68e30bd332d" key="line-3" x="21" y="60" width="204" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="4c88dd41-ad92-4aee-b27d-ac83fe366882" key="line-4" x="283" y="60" width="220" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="5ba0bc36-8971-44c4-a311-6a1fc6e211ae" key="staticText-19" x="281" y="77" width="249" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[SECRETARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="12be5ea3-515e-46e7-bb5d-b725e2f57df9" key="staticText-15" x="46" y="4" width="321" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[TOTAL VALORES SIN RECARGO POR MORA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b78b61d6-cad9-4b97-83c9-fd45cc11b0e8" key="staticText-36" x="423" y="4" width="17" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[$. ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="7aae44c9-a0fc-467f-b245-c7563a395ecf" x="438" y="4" width="48" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{valor_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
