@@ -1402,6 +1402,7 @@ public class pre_urbana extends Pantalla {
 
     }
 
+    @Override
     public void insertar() {
         if (tab_tabla.isFocus()) {
             tab_tabla.insertar();
@@ -1542,6 +1543,7 @@ public class pre_urbana extends Pantalla {
 
     }
 
+    @Override
     public void guardar() {
         //asigna valores a la tabla 1
         if (tab_tabla.isFilaInsertada() == false) {
@@ -2563,11 +2565,13 @@ public class pre_urbana extends Pantalla {
         this.sfr_formato = sfr_formato;
     }
 
+    @Override
     public void abrir_reporte() {
 //Se ejecuta cuando da click en el boton de Reportes de la Barra
         rep_reporte.dibujar();
     }
 
+    @Override
     public void aceptar_reporte() {
 //Se ejecuta cuando se selecciona un reporte de la lista
         if (rep_reporte.getReporteSelecionado().equalsIgnoreCase("Ficha Urbana 2")) {
