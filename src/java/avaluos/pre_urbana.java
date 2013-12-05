@@ -184,7 +184,7 @@ public class pre_urbana extends Pantalla {
                 + " and z.ins_ide_distribucion=p.ide_distribucion "
                 + " and p.ins_ide_distribucion=c.ide_distribucion "
                 + " and c.ins_ide_distribucion=pr.ide_distribucion"
-                + " and s.ide_distribucion=-1";
+                + " ";
         tab_tabla.getColumna("ide_distribucion").setCombo(sql);
 
 
@@ -1176,6 +1176,7 @@ public class pre_urbana extends Pantalla {
 
         tab_tabla.insertar();
         tab_tabla.getColumna("sector").getListaCombo().clear();
+        tab_tabla.getColumna("ide_distribucion").getListaCombo().clear();
         tab_topografia.insertar();
         tab_colindantes.insertar();
         tab_escritura.insertar();
