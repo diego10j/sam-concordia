@@ -135,7 +135,7 @@ public class pre_urbana extends Pantalla {
         tab_tabla.getColumna("frente_fondo").setVisible(false);
         tab_tabla.getColumna("dato_superficie").setVisible(false);
         tab_tabla.getColumna("numero_bloques").setVisible(false);
-        tab_tabla.getColumna("escritura").setVisible(true);
+        tab_tabla.getColumna("escritura").setVisible(false);
         tab_tabla.getColumna("FECHA_DIGITACION").setLectura(true);
         tab_tabla.getColumna("FECHA_DIGITACION").setValorDefecto(utilitario.getFechaHoraActual());
         tab_tabla.getColumna("FECHA_FICHA").setValorDefecto(utilitario.getFechaActual());
@@ -188,13 +188,29 @@ public class pre_urbana extends Pantalla {
                 + " ";
         tab_tabla.getColumna("ide_distribucion").setCombo(sql);
         tab_tabla.getColumna("ide_distribucion").setEstilo("widht:120px");
+        tab_tabla.getColumna("tipo_predio").setValorDefecto("1");
+        
+        /**************************************** campos ocultados por jhoan 6/12/2012 ***************************/
+        tab_tabla.getColumna("tipo_predio").setVisible(false);
+        tab_tabla.getColumna("desconoce_propietario").setVisible(false);
+        tab_tabla.getColumna("tomado_plano").setVisible(false);
+        tab_tabla.getColumna("otra_fuente_infor").setVisible(false);
+        tab_tabla.getColumna("linderos_definidos").setVisible(false);
+        tab_tabla.getColumna("nuevo_bloque").setVisible(false);
+        tab_tabla.getColumna("apliacion_bloque").setVisible(false);
+        
 
-
+        /*******************************************************************************************************/
         tab_tabla.getColumna("SECTOR").setMetodoChange("cargaBarrios");
+       
         tab_tabla.getColumna("ide_distribucion").setMetodoChange("formarClave");
+        tab_tabla.getColumna("MANZANA").setValorDefecto("00");
         tab_tabla.getColumna("MANZANA").setMetodoKeyPress("formarClave");
+        tab_tabla.getColumna("PREDIO").setValorDefecto("000");
         tab_tabla.getColumna("PREDIO").setMetodoKeyPress("formarClave");
+        tab_tabla.getColumna("PH").setValorDefecto("000");
         tab_tabla.getColumna("PH").setMetodoKeyPress("formarClave");
+        
 
         tab_tabla.getColumna("ide_cliente").setCombo("rec_clientes", "ide_cliente", "nombre,cedula", "");
         tab_tabla.getColumna("ide_cliente").setAutoCompletar();
@@ -1408,8 +1424,6 @@ public class pre_urbana extends Pantalla {
         
         com_bloque.setCombo(lis_bloques);
         com_bloque.eliminarVacio();
-        com_combobloques2.setCombo(lis_bloques);
-        com_combobloques2.eliminarVacio();
         cambioBloque();
         utilitario.addUpdate("tab_tabulador:gru_infra");
 
