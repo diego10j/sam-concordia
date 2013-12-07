@@ -175,6 +175,7 @@ public class pre_urbana extends Pantalla {
                 + " and c.ins_ide_distribucion=pr.ide_distribucion"
                 + "";
         tab_tabla.getColumna("sector").setCombo(sql);
+        tab_tabla.getColumna("sector").setEstilo("widht:120px");
 
         sql = " SELECT b.ide_distribucion,b.des_distribucion "
                 + " FROM  inst_distribucion_politica b,inst_distribucion_politica s ,inst_distribucion_politica z,inst_distribucion_politica p,inst_distribucion_politica c,inst_distribucion_politica pr "
@@ -186,11 +187,14 @@ public class pre_urbana extends Pantalla {
                 + " and c.ins_ide_distribucion=pr.ide_distribucion"
                 + " ";
         tab_tabla.getColumna("ide_distribucion").setCombo(sql);
+        tab_tabla.getColumna("ide_distribucion").setEstilo("widht:120px");
 
 
         tab_tabla.getColumna("SECTOR").setMetodoChange("cargaBarrios");
         tab_tabla.getColumna("ide_distribucion").setMetodoChange("formarClave");
         tab_tabla.getColumna("MANZANA").setMetodoKeyPress("formarClave");
+        tab_tabla.getColumna("PREDIO").setMetodoKeyPress("formarClave");
+        tab_tabla.getColumna("PH").setMetodoKeyPress("formarClave");
 
         tab_tabla.getColumna("ide_cliente").setCombo("rec_clientes", "ide_cliente", "nombre,cedula", "");
         tab_tabla.getColumna("ide_cliente").setAutoCompletar();
@@ -808,7 +812,7 @@ public class pre_urbana extends Pantalla {
         greu4.getChildren().add(che_ampliacion_bloque);
 
         Etiqueta etu7 = new Etiqueta();
-        etu7.setValue("Nuevo Bloque No");
+        etu7.setValue("Ampliacion Bloque No");
 
         greu4.getChildren().add(etu7);
 
@@ -939,6 +943,7 @@ public class pre_urbana extends Pantalla {
         fie_escritura.setId("fie_escritura");
         fie_escritura.setLegend("ESCRITURA");
         fie_escritura.getChildren().add(rad_escritura);
+        gri_tenencia.getChildren().add(fie_escritura);
 
         tab_escritura.setId("tab_escritura");
         tab_escritura.setIdCompleto("tab_tabulador:tab_escritura");
@@ -948,7 +953,7 @@ public class pre_urbana extends Pantalla {
         tab_escritura.getColumna("fecha_registro").setValorDefecto(utilitario.getFechaActual());
         tab_escritura.getColumna("ide_aux").setVisible(false);
         tab_escritura.setTipoFormulario(true);
-        tab_escritura.getGrid().setColumns(4);
+        tab_escritura.getGrid().setColumns(6);
         tab_escritura.setNumeroTabla(5);
         tab_escritura.setMostrarNumeroRegistros(false);
         tab_escritura.dibujar();
@@ -1196,6 +1201,7 @@ public class pre_urbana extends Pantalla {
                 + " and c.ins_ide_distribucion=pr.ide_distribucion"
                 + " and s.ide_distribucion=" + tab_tabla.getValor("sector");
         tab_tabla.getColumna("ide_distribucion").setCombo(sql);
+        System.out.println(sql);
         utilitario.addUpdate("tab_tabulador:tab_tabla");
     }
 
@@ -1240,6 +1246,8 @@ public class pre_urbana extends Pantalla {
                 + " and c.ins_ide_distribucion=pr.ide_distribucion"
                 + " and z.ide_distribucion=" + tab_tabla.getValor("zona");
         tab_tabla.getColumna("sector").setCombo(sql);
+        tab_tabla.actualizarCombos();
+        System.out.println(sql);
         utilitario.addUpdate("tab_tabulador:tab_tabla");
 
         tab_tabla.getColumna("ide_distribucion").getListaCombo().clear();
@@ -1249,7 +1257,7 @@ public class pre_urbana extends Pantalla {
         //Forma la clave
         if (tab_tabla.getValor("zona") != null) {
             String str_clave = "";
-            str_clave = tab_tabla.getValor("COD_PROVINCIA") + tab_tabla.getValor("COD_CANTON") + tab_tabla.getValor("COD_PARROQUIA") + tab_tabla.getValor("ZONA") + tab_tabla.getValor("SECTOR") + tab_tabla.getValor("MANZANA");
+            str_clave = tab_tabla.getValor("COD_PROVINCIA") + tab_tabla.getValor("COD_CANTON") + tab_tabla.getValor("COD_PARROQUIA") + tab_tabla.getValor("ZONA") + tab_tabla.getValor("SECTOR") + tab_tabla.getValor("MANZANA")+ tab_tabla.getValor("PREDIO")+ tab_tabla.getValor("PH");
             tab_tabla.setValor("CLAVE", str_clave);
             utilitario.addUpdateTabla(tab_tabla, "CLAVE", "");
         }
@@ -1260,7 +1268,7 @@ public class pre_urbana extends Pantalla {
         //Forma la clave
         if (tab_tabla.getValor("zona") != null) {
             String str_clave = "";
-            str_clave = tab_tabla.getValor("COD_PROVINCIA") + tab_tabla.getValor("COD_CANTON") + tab_tabla.getValor("COD_PARROQUIA") + tab_tabla.getValor("ZONA") + tab_tabla.getValor("SECTOR") + tab_tabla.getValor("MANZANA") + tab_tabla.getValor("LOTE") + tab_tabla.getValor("UNIDAD");
+            str_clave = tab_tabla.getValor("COD_PROVINCIA") + tab_tabla.getValor("COD_CANTON") + tab_tabla.getValor("COD_PARROQUIA") + tab_tabla.getValor("ZONA") + tab_tabla.getValor("SECTOR") + tab_tabla.getValor("MANZANA") + tab_tabla.getValor("PREDIO") + tab_tabla.getValor("PH");
             tab_tabla.setValor("CLAVE", str_clave);
             utilitario.addUpdateTabla(tab_tabla, "CLAVE", "");
         }
@@ -1397,8 +1405,11 @@ public class pre_urbana extends Pantalla {
         tab_superficie.setValor("area_total_terreno", utilitario.getFormatoNumero(tab_bloque_predio.getSumaColumna("superficie_construccion")) + "");
         utilitario.addUpdate("tab_tabulador:tab_superficie");
         ////////////////para         
+        
         com_bloque.setCombo(lis_bloques);
         com_bloque.eliminarVacio();
+        com_combobloques2.setCombo(lis_bloques);
+        com_combobloques2.eliminarVacio();
         cambioBloque();
         utilitario.addUpdate("tab_tabulador:gru_infra");
 
