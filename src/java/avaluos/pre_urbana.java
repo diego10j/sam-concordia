@@ -1468,6 +1468,7 @@ public class pre_urbana extends Pantalla {
     public void insertar() {
         if (tab_tabla.isFocus()) {
             tab_tabla.insertar();
+            cargarFicha();
         } else if (tab_imagen.isFocus()) {
             tab_imagen.insertar();
         } else if (tab_foto.isFocus()) {
