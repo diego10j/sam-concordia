@@ -2755,12 +2755,14 @@ public class pre_urbana extends Pantalla {
     }
 
     public void buscar() {
+        tab_tabla.setCondicion("");
         utilitario.getBuscaTabla().setBuscar(tab_tabla);
         utilitario.getBuscaTabla().getBot_aceptar().setMetodo("aceptaBuscar");
     }
 
     public void aceptaBuscar() {
         utilitario.getBuscaTabla().aceptarBuscar();
+        System.out.println(tab_tabla.getSql());
         if (utilitario.getBuscaTabla().isVisible() == false) {
             cargarFicha();
         }
@@ -2783,7 +2785,7 @@ public class pre_urbana extends Pantalla {
     }
 
     @Override
-    public void abrir_reporte() {
+    public void abrirListaReportes() {
 //Se ejecuta cuando da click en el boton de Reportes de la Barra
         rep_reporte.dibujar();
     }
