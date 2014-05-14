@@ -106,8 +106,7 @@ public class pre_urbana extends Pantalla {
     private Texto tex_edificacion_privado = new Texto();
     private Texto tex_terreno_publico = new Texto();
     private Texto tex_edificacion_publico = new Texto();
-    
-    private String zona_text=null;
+    private String zona_text = null;
 
     public pre_urbana() {
 
@@ -183,7 +182,7 @@ public class pre_urbana extends Pantalla {
         tab_tabla.getColumna("FECHA_DIGITACION").setValorDefecto(utilitario.getFechaHoraActual());
         tab_tabla.getColumna("FECHA_FICHA").setValorDefecto(utilitario.getFechaActual());
         tab_tabla.getColumna("CLAVE").setEtiqueta();
-      //************ MODIFICADO POR EL JHOAN
+        //************ MODIFICADO POR EL JHOAN
         //tab_tabla.getColumna("CLAVE").isUnico();
         tab_tabla.getColumna("CLAVE").setEstilo("font-weight: bold;font-size:15px;color:red");
 
@@ -227,7 +226,7 @@ public class pre_urbana extends Pantalla {
                 + "";
         tab_tabla.getColumna("sector").setCombo(sql);
         tab_tabla.getColumna("SECTOR").setMetodoChange("cargaBarrios");
-       
+
         sql = " SELECT b.cod_distribucion,b.des_distribucion "
                 + " FROM  inst_distribucion_politica b,inst_distribucion_politica s ,inst_distribucion_politica z,inst_distribucion_politica p,inst_distribucion_politica c,inst_distribucion_politica pr "
                 + " WHERE b.ide_tipo_distribucion=7 "
@@ -238,9 +237,9 @@ public class pre_urbana extends Pantalla {
                 + " and c.ins_ide_distribucion=pr.ide_distribucion"
                 + " ";
         tab_tabla.getColumna("ide_distribucion").setCombo(sql);
-        System.out.println("CARGAR distribucion " + sql);
+        //System.out.println("CARGAR distribucion " + sql);
 
-        
+
         tab_tabla.getColumna("ide_distribucion").setMetodoChange("formarClave");
         tab_tabla.getColumna("PREDIO").setValorDefecto("001");
         tab_tabla.getColumna("MANZANA").setMetodoKeyPress("formarClave");
@@ -248,7 +247,7 @@ public class pre_urbana extends Pantalla {
         tab_tabla.getColumna("PREDIO").setMetodoKeyPress("formarClave");
         tab_tabla.getColumna("PH").setValorDefecto("000");
         tab_tabla.getColumna("PH").setMetodoKeyPress("formarClave");
-        
+
 
         tab_tabla.getColumna("ide_cliente").setCombo("rec_clientes", "ide_cliente", "nombre,cedula", "");
         tab_tabla.getColumna("ide_cliente").setAutoCompletar();
@@ -295,6 +294,7 @@ public class pre_urbana extends Pantalla {
         Grid gri_tenencia = new Grid();
         gri_tenencia.setColumns(3);
         Grupo gri = new Grupo();
+        gri.setId("predial_ii");
         gri.getChildren().add(eti);
         gri.getChildren().add(tab_topografia);
         gri.getChildren().add(eti2);
@@ -318,11 +318,13 @@ public class pre_urbana extends Pantalla {
         eti_blo.setValue("BLOQUE N");
         gri_bloque.getChildren().add(eti_blo);
         com_bloque.setStyle("width:90px");
+        com_bloque.setId("com_bloque");
         com_bloque.setMetodo("cambioBloque", "tab_tabulador:gru_infra");
         gri_bloque.getChildren().add(com_bloque);
         gru_infra.getChildren().add(gri_bloque);
 
         Tabulador tab_pesta = new Tabulador();
+        tab_pesta.setId("tab_pesta");
         tab_pesta.agregarTab("C. GENERALES/ESTRUCTURA", gru_pesta1);
         tab_pesta.agregarTab("ACABADOS", gri_pesta2);
         tab_pesta.agregarTab("INSTALACIONES", gri_pesta3);
@@ -729,6 +731,7 @@ public class pre_urbana extends Pantalla {
         fp30.setLegend("OTROS");
         fp30.getChildren().add(g30);
         gri_terreno.getChildren().add(fp30);
+        gri_terreno.setId("gri_terreno");
 
 
         tab_tabulador.agregarTab("TERRENOS / INFRAESTRUCTURA", gri_terreno);
@@ -749,11 +752,14 @@ public class pre_urbana extends Pantalla {
         tab_uso4.setId("tab_uso4");
         gri_su.getChildren().add(tab_uso4);
         gri_su.setStyle("width:100%;height:100%;overflow: auto;display: block;");
+        gri_su.setId("gri_suelo");
         tab_tabulador.agregarTab("USO SUELOS", gri_su);
+        gru_infra.setId("gru_infra");
         tab_tabulador.agregarTab("EDIFICACIÓN", gru_infra);
 
         ////OTAS INVERSIONES
         Grupo gru_otras = new Grupo();
+        gru_otras.setId("gru_otras");
         tab_tabulador.agregarTab("OTRAS INVERSIONES", gru_otras);
 
         Fieldset fo = new Fieldset();
@@ -935,19 +941,19 @@ public class pre_urbana extends Pantalla {
         tab_foto.setId("tab_foto");
         tab_foto.setIdCompleto("tab_tabulador:tab_foto");
         PanelTabla pat_panel9 = new PanelTabla();
-        pat_panel9.setPanelTabla(tab_foto);
+        pat_panel9.setPanelTabla(tab_foto);        
         tab_tabulador.agregarTab("FOTOS", pat_panel9);
 
         tab_croquis.setId("tab_croquis");
         tab_croquis.setIdCompleto("tab_tabulador:tab_croquis");
         PanelTabla pat_panel10 = new PanelTabla();
-        pat_panel10.setPanelTabla(tab_croquis);
+        pat_panel10.setPanelTabla(tab_croquis);        
         tab_tabulador.agregarTab("CROQUIS", pat_panel10);
 
         tab_imagen.setId("tab_imagen");
         tab_imagen.setIdCompleto("tab_tabulador:tab_imagen");
         PanelTabla pat_panel11 = new PanelTabla();
-        pat_panel11.setPanelTabla(tab_imagen);
+        pat_panel11.setPanelTabla(tab_imagen);        
         tab_tabulador.agregarTab("IMAGENES DOC.", pat_panel11);
 
 
@@ -1300,11 +1306,11 @@ public class pre_urbana extends Pantalla {
         tab_tabla.modificar(evt);
         List lisa = utilitario.getConexion().consultar("SELECT p.ide_distribucion FROM  inst_distribucion_politica p "
                 + "  WHERE p.ide_tipo_distribucion=6 "
-                + "  and p.ins_ide_distribucion="+ zona_text + ""
+                + "  and p.ins_ide_distribucion=" + zona_text + ""
                 + " and p.cod_distribucion=" + "'" + tab_tabla.getValor("sector") + "'");
         System.out.println("SELECT p.ide_distribucion FROM  inst_distribucion_politica p "
                 + "  WHERE p.ide_tipo_distribucion=6 "
-                + "  and p.ins_ide_distribucion="+ zona_text + ""
+                + "  and p.ins_ide_distribucion=" + zona_text + ""
                 + " and p.cod_distribucion=" + "'" + tab_tabla.getValor("sector") + "'");;
         val = lisa.get(0) + "";
         System.out.println("Ejecutando barrios" + val);
@@ -1403,7 +1409,7 @@ public class pre_urbana extends Pantalla {
         if (tab_tabla.getValor("zona") != null) {
             if (tab_tabla.getValor("sector") != null) {
                 String str_clave = "";
-                str_clave = tab_tabla.getValor("COD_PROVINCIA") + tab_tabla.getValor("COD_CANTON") + tab_tabla.getValor("COD_PARROQUIA") + tab_tabla.getValor("ZONA") + tab_tabla.getValor("SECTOR") + tab_tabla.getValor("MANZANA")+tab_tabla.getValor("PREDIO")+tab_tabla.getValor("PH");
+                str_clave = tab_tabla.getValor("COD_PROVINCIA") + tab_tabla.getValor("COD_CANTON") + tab_tabla.getValor("COD_PARROQUIA") + tab_tabla.getValor("ZONA") + tab_tabla.getValor("SECTOR") + tab_tabla.getValor("MANZANA") + tab_tabla.getValor("PREDIO") + tab_tabla.getValor("PH");
                 tab_tabla.setValor("CLAVE", str_clave);
                 utilitario.addUpdateTabla(tab_tabla, "CLAVE", "");
             } else {
@@ -1419,7 +1425,7 @@ public class pre_urbana extends Pantalla {
         //Forma la clave
         if (tab_tabla.getValor("zona") != null) {
             String str_clave = "";
-            str_clave = tab_tabla.getValor("COD_PROVINCIA") + tab_tabla.getValor("COD_CANTON") + tab_tabla.getValor("COD_PARROQUIA") + tab_tabla.getValor("ZONA") + tab_tabla.getValor("SECTOR") + tab_tabla.getValor("MANZANA")+ tab_tabla.getValor("PREDIO")+tab_tabla.getValor("PH");
+            str_clave = tab_tabla.getValor("COD_PROVINCIA") + tab_tabla.getValor("COD_CANTON") + tab_tabla.getValor("COD_PARROQUIA") + tab_tabla.getValor("ZONA") + tab_tabla.getValor("SECTOR") + tab_tabla.getValor("MANZANA") + tab_tabla.getValor("PREDIO") + tab_tabla.getValor("PH");
             tab_tabla.setValor("CLAVE", str_clave);
             utilitario.addUpdateTabla(tab_tabla, "CLAVE", "");
         }
@@ -2208,7 +2214,7 @@ public class pre_urbana extends Pantalla {
         lis_topografia.setValue(null);
         lis_localizacion.setValue(null);
         lis_forma.setValue(null);
-        utilitario.addUpdate("tab_tabulador");
+        //  utilitario.addUpdate("tab_tabulador");
         for (int i = 0; i < t_terrenos.getTotalFilas(); i++) {
             if (i == 0) {
                 lis_ocupacion.setValue(t_terrenos.getValor(0, "ide_detalle_terrenos"));
@@ -2602,6 +2608,7 @@ public class pre_urbana extends Pantalla {
         com_bloque.setCombo(lis_bloques);
         com_bloque.eliminarVacio();
         cambioBloque();
+        utilitario.addUpdate("@form");
     }
 
     public void eliminar() {
@@ -2761,10 +2768,16 @@ public class pre_urbana extends Pantalla {
     }
 
     public void aceptaBuscar() {
-        utilitario.getBuscaTabla().aceptarBuscar();
-        System.out.println(tab_tabla.getSql());
+        utilitario.getBuscaTabla().aceptarBuscarSeleccionado();
         if (utilitario.getBuscaTabla().isVisible() == false) {
             cargarFicha();
+            utilitario.addUpdate("tab_tabulador:predial_ii");
+            utilitario.addUpdate("tab_tabulador:gri_terreno");
+            utilitario.addUpdate("tab_tabulador:gri_suelo");
+            utilitario.addUpdate("tab_tabulador:tab_pesta");
+            utilitario.addUpdate("tab_tabulador:gru_otras");
+           // utilitario.addUpdate("tab_tabulador:com_bloque");
+            
         }
     }
 
@@ -2785,7 +2798,7 @@ public class pre_urbana extends Pantalla {
     }
 
     @Override
-    public void abrirListaReportes() {
+    public void abrir_reporte(){
 //Se ejecuta cuando da click en el boton de Reportes de la Barra
         rep_reporte.dibujar();
     }
