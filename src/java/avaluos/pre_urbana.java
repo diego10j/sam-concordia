@@ -941,19 +941,19 @@ public class pre_urbana extends Pantalla {
         tab_foto.setId("tab_foto");
         tab_foto.setIdCompleto("tab_tabulador:tab_foto");
         PanelTabla pat_panel9 = new PanelTabla();
-        pat_panel9.setPanelTabla(tab_foto);        
+        pat_panel9.setPanelTabla(tab_foto);
         tab_tabulador.agregarTab("FOTOS", pat_panel9);
 
         tab_croquis.setId("tab_croquis");
         tab_croquis.setIdCompleto("tab_tabulador:tab_croquis");
         PanelTabla pat_panel10 = new PanelTabla();
-        pat_panel10.setPanelTabla(tab_croquis);        
+        pat_panel10.setPanelTabla(tab_croquis);
         tab_tabulador.agregarTab("CROQUIS", pat_panel10);
 
         tab_imagen.setId("tab_imagen");
         tab_imagen.setIdCompleto("tab_tabulador:tab_imagen");
         PanelTabla pat_panel11 = new PanelTabla();
-        pat_panel11.setPanelTabla(tab_imagen);        
+        pat_panel11.setPanelTabla(tab_imagen);
         tab_tabulador.agregarTab("IMAGENES DOC.", pat_panel11);
 
 
@@ -1327,6 +1327,29 @@ public class pre_urbana extends Pantalla {
         System.out.println("cargar barrios" + sql);
         tab_tabla.getColumna("ide_distribucion").setCombo(sql);
         utilitario.addUpdate("tab_tabulador:tab_tabla");
+    }
+
+    public void cargaTodosBarrios() {
+
+        String sql = " SELECT s.ide_distribucion,s.des_distribucion  FROM  inst_distribucion_politica s ,inst_distribucion_politica z,inst_distribucion_politica p,inst_distribucion_politica c,inst_distribucion_politica pr "
+                + " WHERE s.ide_tipo_distribucion=6 "
+                + " and s.ins_ide_distribucion=z.ide_distribucion "
+                + " and z.ins_ide_distribucion=p.ide_distribucion "
+                + " and p.ins_ide_distribucion=c.ide_distribucion "
+                + " and c.ins_ide_distribucion=pr.ide_distribucion";
+        System.out.println(sql);
+        tab_tabla.getColumna("sector").setCombo(sql);
+        sql = " SELECT b.ide_distribucion,b.des_distribucion "
+                + " FROM  inst_distribucion_politica b,inst_distribucion_politica s ,inst_distribucion_politica z,inst_distribucion_politica p,inst_distribucion_politica c,inst_distribucion_politica pr "
+                + " WHERE b.ide_tipo_distribucion=7 "
+                + " and b.ins_ide_distribucion=s.ide_distribucion "
+                + " and s.ins_ide_distribucion=z.ide_distribucion "
+                + " and z.ins_ide_distribucion=p.ide_distribucion "
+                + " and p.ins_ide_distribucion=c.ide_distribucion "
+                + " and c.ins_ide_distribucion=pr.ide_distribucion";
+        // + " and s.ide_distribucion=" + val;        
+        tab_tabla.getColumna("ide_distribucion").setCombo(sql);
+        // utilitario.addUpdate("tab_tabulador:tab_tabla");
     }
 
     public void buscarCodigos(SelectEvent evt) {
@@ -2763,8 +2786,11 @@ public class pre_urbana extends Pantalla {
 
     public void buscar() {
         tab_tabla.setCondicion("");
+        cargaTodosBarrios();
         utilitario.getBuscaTabla().setBuscar(tab_tabla);
         utilitario.getBuscaTabla().getBot_aceptar().setMetodo("aceptaBuscar");
+
+        
     }
 
     public void aceptaBuscar() {
@@ -2776,8 +2802,8 @@ public class pre_urbana extends Pantalla {
             utilitario.addUpdate("tab_tabulador:gri_suelo");
             utilitario.addUpdate("tab_tabulador:tab_pesta");
             utilitario.addUpdate("tab_tabulador:gru_otras");
-           // utilitario.addUpdate("tab_tabulador:com_bloque");
-            
+            // utilitario.addUpdate("tab_tabulador:com_bloque");
+
         }
     }
 
@@ -2798,7 +2824,7 @@ public class pre_urbana extends Pantalla {
     }
 
     @Override
-    public void abrir_reporte(){
+    public void abrir_reporte() {
 //Se ejecuta cuando da click en el boton de Reportes de la Barra
         rep_reporte.dibujar();
     }
